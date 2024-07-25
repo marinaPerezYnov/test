@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy":"ssh marinaPerezYnov@172.24.176.1 'cd /var/www/html && git pull'"
+    "deploy":"ssh marinaPerezYnov@172.24.176.1 'git pull"
   },
   "eslintConfig": {
     "extends": [
