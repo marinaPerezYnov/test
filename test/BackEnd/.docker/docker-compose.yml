@@ -1,0 +1,48 @@
+version: '3.0'
+
+services:
+  # NGINX Service
+  web-nginx:
+    image: nginx:stable-alpine
+    # container_name: web-nginx-tests
+    working_dir: /usr/share/nginx/html
+    volumes:
+      #volume stockant les fichiers web du projet
+      - "./apiFolder:/usr/share/nginx/html:ro"
+      - "./.docker/nginx/log:/var/log/nginx"
+      - "./.docker/nginx/nginx.conf/:/etc/nginx/nginx.conf/:ro"
+    ports:
+    #local: container
+      - "8081:80"
+  # PHP Service
+  web-api-tests-php-bloc:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+
+    working_dir: /usr/share/nginx/html
+    volumes:
+      - "./apiFolder:/usr/share/nginx/html"
+    command:
+      - /bin/sh
+      - -c
+      - |
+         composer update --prefer-dist --no-progress & php-fpm
+
+  database:
+    image: 'mariadb:10.5.12'
+    env_file:
+      - ./.docker/mariadb/.env.dev
+    ports:
+      - "3306:3306"
+  adminer:
+    image: adminer
+    #    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  db_data: {}
+
+# Start containers with docker-compose up -d
+# Go into the php container with docker-compose exec php bash
