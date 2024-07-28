@@ -23,21 +23,9 @@ jobs:
     
             - name: Build
               run: npm run build
-              
-            # - name: Add SSH key and known hosts
-            #   run: |
-            #   echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            #   chmod 600 ~/.ssh/id_rsa
-            #   ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-            #   rsync -e "ssh -o StrictHostKeyChecking=no" ${{ secrets.ARGS }} ${{ secrets.SOURCE }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
-
+            
             - name: Deploy
               # uses: easingthemes/ssh-deploy@v2.1.5
               run: npm run deploy
-              # with:
-              #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-              #   ARGS: "-rltgoDzvO"
-              #   SOURCE: "dist/"
-              #   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-              #   REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                # TARGET: ${{ secrets.REMOTE_TARGET }}
+              env:
+                SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
