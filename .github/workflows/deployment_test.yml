@@ -8,9 +8,12 @@ on:
       - main
 
 permissions:
-  contents: read
-  packages: write
-
+  deployments: write
+  contents: write
+  statuses: write
+  actions: write
+  checks: read
+  
 jobs:
     deploy:
       # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -46,6 +49,7 @@ jobs:
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: public
+
         # - name: Déployer sur GitHub Pages
           # uses: actions/deploy-pages@v3
           # with:
