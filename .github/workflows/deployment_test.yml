@@ -23,10 +23,10 @@ jobs:
     
         - name: Build
           run: npm run build
-    build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+    # build-and-deploy:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v3
     
         # - name: Build the site
         #   run: |
