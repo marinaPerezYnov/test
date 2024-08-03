@@ -9,23 +9,39 @@ on:
 
 jobs:
     deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
-            - name: Set up Node.js
-              uses: actions/setup-node@v1
-              with:
-                node-version: '12.x'
-                
-            - name: Install dependencies
-              run: npm install
-    
-            - name: Build
-              run: npm run build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+        - name: Set up Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
             
-            - name: Deploy
-              # uses: easingthemes/ssh-deploy@v2.1.5
-              run: npm run deploy
-              env:
-                SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        - name: Install dependencies
+          run: npm install
+    
+        - name: Build
+          run: npm run build
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+    
+        - name: Build the site
+          run: |
+            # Remplacer cette partie par les commandes nécessaires pour générer votre site
+            # Par exemple, pour un site Hugo :
+            hugo
+        - name: Upload artifact
+          uses: actions/upload-artifact@v3
+          with:
+            path: public
+        - name: Deploy to GitHub Pages
+          if: ${{ github.ref == 'refs/heads/main' }}
+          uses: actions/deploy-pages@v3
+            # - name: Deploy
+            #   # uses: easingthemes/ssh-deploy@v2.1.5
+            #   run: npm run deploy
+            #   env:
+            #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
