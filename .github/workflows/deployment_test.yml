@@ -50,4 +50,4 @@ jobs:
           # uses: actions/deploy-pages@v3
           # with:
             # github_token: ${{ secrets.GITHUB_TOKEN }}
-            # artifact-name: my-site-artifact  # Correspond au nom de l'artefact téléchargé
+            # artifact-name: my-site-artifact  # Correspond au nom de l'artefact téléchargé 
