@@ -28,11 +28,11 @@ jobs:
       steps:
         - uses: actions/checkout@v3
     
-        - name: Build the site
-          run: |
-            # Remplacer cette partie par les commandes nécessaires pour générer votre site
-            # Par exemple, pour un site Hugo :
-            hugo
+        # - name: Build the site
+        #   run: |
+        #     # Remplacer cette partie par les commandes nécessaires pour générer votre site
+        #     # Par exemple, pour un site Hugo :
+        #     hugo
         - name: Upload artifact
           uses: actions/upload-artifact@v3
           with:
