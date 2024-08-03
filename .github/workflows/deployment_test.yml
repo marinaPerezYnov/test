@@ -36,6 +36,18 @@ jobs:
     
         - name: Build
           run: npm run build
+        - name: Télécharger l'artefact
+          uses: actions/upload-artifact@v3
+          with:
+            path: public
+            name: my-site-artifact  # Nom explicite pour l'artefact
         - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v3 # or specific "vX.X.X" version tag for this action
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: public
+        # - name: Déployer sur GitHub Pages
+          # uses: actions/deploy-pages@v3
+          # with:
+            # github_token: ${{ secrets.GITHUB_TOKEN }}
+            # artifact-name: my-site-artifact  # Correspond au nom de l'artefact téléchargé
